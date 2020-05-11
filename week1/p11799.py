@@ -1,0 +1,1 @@
+print("\n".join(["Case "+str(i+1)+": "+str(max(list(map(int,input().split()))[1:])) for i in range(int(input()))]))

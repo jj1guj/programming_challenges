@@ -1,0 +1,1 @@
+T=int(input());L=["Case "+str(i+1)+": "+str(sorted(list(map(int,input().split())))[1]) for i in range(T)];print("\n".join(L))
