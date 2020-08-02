@@ -1,35 +1,25 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-vector<int>L(1000001);
+int L[1000000];
+int N=100000;
 
-int getmax(int a,int b){
-    int i,out=0;
-    a--;
-    b--;
-    for(i=a;i<=b;i++)out=max(out,L[i]);
-    return out;
+int collatz(int k){
+    int res;
+    if(k>=1 && k<=N && L[k-1]!=-1)return L[k-1];
+    if(k%2==1)res=collatz(3*k+1)+1;
+    else res=collatz(k/2)+1;
+    if(k>=1 && k<=N)L[k-1]=res;
+    return res;
 }
 
 int main(){
-    int ans=0,calc,n,i,j,a,b;
-    for(i=0;i<=1000000;i++){
-        n=i+1;
-        L[i]=1;
-        while(n!=1){
-            if(n%2==0){
-                n/=2;
-            }else{
-                n=3*n+1;
-            }
-            L[i]++;
-        }
-    }
-
-    while(true){
-        cin>>a;
-        if(cin.fail()||cin.eof())return 0;
-        cin>>b;
-        cout<<a<<" "<<b<<" "<<getmax(min(a,b),max(a,b))<<"\n";
+    int a,b,i,ans;
+    L[0]=1;
+    for(i=1;i<1000000;i++)L[i]=-1;
+    while(cin>>a>>b){
+        ans=0;
+        for(i=min(a,b);i<=max(a,b);i++)ans=max(ans,collatz(i));
+        cout<<a<<" "<<b<<" "<<ans<<"\n";
     }
 }
